@@ -1,5 +1,6 @@
 import React,{useState} from "react";
 import Axios from "axios";
+import logo from "../logo/Octocat.png"
 import styled  from "styled-components";
 
 const Search = () => {
@@ -7,16 +8,22 @@ const Search = () => {
     const [userData,setUserData] = useState(null);
 
     const apiHandler = async() => {
-        const { data } = await Axios.get(`https://api.github.com/users/${username}`);
-        setUserData(data);
-        console.log({data})
+        try {
+            const { data } = await Axios.get(`https://api.github.com/users/${username}`);
+            setUserData(data);
+            console.log({data})   
+        } catch (error) {
+            console.log(error)
+        }
     }
     const formSubmitHandler = (e) => {
         e.preventDefault();
         apiHandler();
+        console.log(userData);
     }
     return(
         <SearchContainer>
+            <img src={logo} alt="github octocat logo png"/>
             <Title>Find your Profile</Title>
             <form onSubmit={formSubmitHandler}>
                 <input value={username} onChange={e=>setUsername(e.target.value)} type="text" placeholder="Github Username" size="50"/>
@@ -33,12 +40,17 @@ const SearchContainer = styled.div`
     min-height: 100vh;
     padding: 4rem;
     display:flex;
-    justify-content: center;
+    /* justify-content: center; */
     align-items: center;
     flex-direction: column;
     background-color: #4B2142;
+    img{
+        width: 200px;
+        margin-top: 4rem;
+    }
     input{
         padding: 1.5rem;
+        outline-width: 0;
     }
 `
 export default Search;
