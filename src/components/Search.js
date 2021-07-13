@@ -1,11 +1,16 @@
-import React from "react";
+import React,{useState} from "react";
 import styled  from "styled-components";
 const Search = () => {
+    const [username,setUsername] = useState("");
+    const formSubmitHandler = (e) => {
+        e.preventDefault();
+        console.log(username)
+    }
     return(
         <SearchContainer>
             <Title>Find your Profile</Title>
-            <form>
-                <input type="text" placeholder="Github Username" size="50"/>
+            <form onSubmit={formSubmitHandler}>
+                <input value={username} onChange={e=>setUsername(e.target.value)} type="text" placeholder="Github Username" size="50"/>
             </form>
         </SearchContainer>
     )
