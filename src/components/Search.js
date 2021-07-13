@@ -1,10 +1,19 @@
 import React,{useState} from "react";
+import Axios from "axios";
 import styled  from "styled-components";
+
 const Search = () => {
     const [username,setUsername] = useState("");
+    const [userData,setUserData] = useState(null);
+
+    const apiHandler = async() => {
+        const { data } = await Axios.get(`https://api.github.com/users/${username}`);
+        setUserData(data);
+        console.log({data})
+    }
     const formSubmitHandler = (e) => {
         e.preventDefault();
-        console.log(username)
+        apiHandler();
     }
     return(
         <SearchContainer>
