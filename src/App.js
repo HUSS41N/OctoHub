@@ -1,14 +1,22 @@
 import React from "react";
 import Search from "./components/Search";
+import DetailsPage from "./components/DetailsPage";
+import PageNotFound from "./components/PageNotFound"
 import { createGlobalStyle } from "styled-components";
+import { Switch, Route, BrowserRouter as Router } from "react-router-dom";
+
 const App = () => {
   return (
-    <div>
-      <GlobalStlye/>
-      <Search/>
-    </div>
-  )
-}
+    <Router>
+      <GlobalStlye />
+      <Switch>
+        <Route exact path="/" component={Search} />
+        <Route exact path="/result" component={DetailsPage} />
+        <Route exact path="*" component={PageNotFound} />
+      </Switch>
+    </Router>
+  );
+};
 
 const GlobalStlye = createGlobalStyle`
   *{
@@ -20,5 +28,5 @@ const GlobalStlye = createGlobalStyle`
     font-size: 62.5%;
   }
 
-`
+`;
 export default App;

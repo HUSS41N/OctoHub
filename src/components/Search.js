@@ -2,7 +2,7 @@ import React,{useState} from "react";
 import Axios from "axios";
 import logo from "../logo/Octocat.png"
 import styled  from "styled-components";
-
+import { Redirect } from "react-router";
 const Search = () => {
     const [username,setUsername] = useState("");
     const [userData,setUserData] = useState(null);
@@ -19,7 +19,9 @@ const Search = () => {
     const formSubmitHandler = (e) => {
         e.preventDefault();
         apiHandler();
-        console.log(userData);
+    }
+    if(userData){
+        return <Redirect to="/result"/>
     }
     return(
         <SearchContainer>
