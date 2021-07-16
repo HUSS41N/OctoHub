@@ -1,17 +1,17 @@
-import React,{useState} from "react";
+import React,{useState,useContext} from "react";
+import UserContext from "../context/UserContext"
 import Axios from "axios";
 import logo from "../logo/Octocat.png"
 import styled  from "styled-components";
 import { Redirect } from "react-router";
 const Search = () => {
+    const context = useContext(UserContext);
     const [username,setUsername] = useState("");
-    const [userData,setUserData] = useState(null);
 
     const apiHandler = async() => {
         try {
             const { data } = await Axios.get(`https://api.github.com/users/${username}`);
-            setUserData(data);
-            console.log({data})   
+            context.setUser({data})
         } catch (error) {
             console.log(error)
         }
@@ -20,7 +20,7 @@ const Search = () => {
         e.preventDefault();
         apiHandler();
     }
-    if(userData){
+    if(context.user){
         return <Redirect to="/result"/>
     }
     return(

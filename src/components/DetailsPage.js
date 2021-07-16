@@ -1,11 +1,13 @@
-import React from "react"
+import React,{useContext} from "react"
+import UserContext from "../context/UserContext"
 import logo from "../logo/Octocat.png"
 import styled  from "styled-components"
 const DetailsPage = () => {
+    const context = useContext(UserContext);
     return (
         <DetailsDiv>
             <img src={logo} alt="placeholder"/>
-            <h1>Md Hussain</h1>
+            <h1>{context.user.data.login}</h1>
             <a href="/">@HUSS41N</a>
             <div>
                 <p>Delhi</p>
