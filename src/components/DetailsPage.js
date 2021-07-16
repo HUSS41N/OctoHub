@@ -4,14 +4,15 @@ import logo from "../logo/Octocat.png"
 import styled  from "styled-components"
 const DetailsPage = () => {
     const context = useContext(UserContext);
+    console.log(context.user)
     return (
         <DetailsDiv>
-            <img src={logo} alt="placeholder"/>
-            <h1>{context.user.data.login}</h1>
-            <a href="/">@HUSS41N</a>
+            <img src={context.user.data.avatar_url} alt="placeholder"/>
+            <h1>{context.user.data.name}</h1>
+            <a href={context.user.data.html_url}>@{context.user.data.login}</a>
             <div>
-                <p>Delhi</p>
-                <p>Joined July 7, 2020</p>
+                <p>{context.user.data.location}</p>
+                <p>{context.user.data.created_at}</p>
             </div>
         </DetailsDiv>
     )
@@ -32,7 +33,8 @@ const DetailsDiv = styled.div`
         text-decoration: none;
     }
     img{
-        width: 300px;
+        width: 200px;
+        border-radius: 50%;
     }
     h1{
         color: #8CC7A1;
