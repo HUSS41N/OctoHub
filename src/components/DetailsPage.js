@@ -3,16 +3,15 @@ import UserContext from "../context/UserContext"
 import logo from "../logo/Octocat.png"
 import styled  from "styled-components"
 const DetailsPage = () => {
-    const context = useContext(UserContext);
-    console.log(context.user)
+    const [user,setUser] = useContext(UserContext)
     return (
         <DetailsDiv>
-            <img src={context.user.data.avatar_url} alt="placeholder"/>
-            <h1>{context.user.data.name}</h1>
-            <a href={context.user.data.html_url}>@{context.user.data.login}</a>
+            <img src={user.data.avatar_url} alt="placeholder"/>
+            <h1>{user.data.name}</h1>
+            <a href={user.data.html_url}>@{user.data.login}</a>
             <div>
-                <p>{context.user.data.location}</p>
-                <p>{context.user.data.created_at}</p>
+                <p>{user.data.location}</p>
+                <p>{user.data.created_at}</p>
             </div>
         </DetailsDiv>
     )

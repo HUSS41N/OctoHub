@@ -11,7 +11,7 @@ const App = () => {
   return (
     <Router>
       <GlobalStlye />
-      <UserContext.Provider value={{user,setUser}}>
+      <UserContext.Provider value={[user,setUser]}>
       <Switch>
         <Route exact path="/" component={Search} />
         <Route exact path="/result" component={DetailsPage} />

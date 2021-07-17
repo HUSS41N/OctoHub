@@ -5,13 +5,14 @@ import logo from "../logo/Octocat.png"
 import styled  from "styled-components";
 import { Redirect } from "react-router";
 const Search = () => {
-    const context = useContext(UserContext);
+    // const context = useContext(UserContext);
+    const [user,setUser] = useContext(UserContext)
     const [username,setUsername] = useState("");
 
     const apiHandler = async() => {
         try {
             const { data } = await Axios.get(`https://api.github.com/users/${username}`);
-            context.setUser({data})
+            setUser({data})
         } catch (error) {
             console.log(error)
         }
@@ -20,7 +21,7 @@ const Search = () => {
         e.preventDefault();
         apiHandler();
     }
-    if(context.user){
+    if(user){
         return <Redirect to="/result"/>
     }
     return(
