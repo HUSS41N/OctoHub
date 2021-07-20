@@ -6,7 +6,7 @@ import styled from "styled-components";
 const BarChart = ({ username }) => {
     const [repoData,setRepoData] = useState(null);
     let stars = [];
-    
+    let repoName = [];
     const apiHandler = useCallback(
         async() => {
             try {
@@ -19,19 +19,23 @@ const BarChart = ({ username }) => {
     )
     useEffect(()=>{apiHandler()},[apiHandler])
     if(repoData){
-        stars = repoData.map(data => data.stargazers_count);
-        stars.sort((function(a, b){return b - a}))
+        stars = repoData.filter(repo => !repo.fork).sort((function(a, b){return b['stargazers_count'] - a['stargazers_count']})).slice(0,5);
+        repoName = repoData.map(data=> data.full_name);
+        // stars.sort((function(a, b){return b['stargazers_count'] - a['stargazers_count']})).slice(0,5);
+       
     }
+    // console.log(repoData)
     console.log(stars)
+    // console.log(repoName)
   return (
     <Container>
       <Bar
         data={{
-          labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
+          labels: repoName,
           datasets: [
             {
               label: "# of Votes",
-              data: [12, 19, 3, 5, 2, 3],
+              data: [1,2,3],
               backgroundColor: [
                 "rgba(255, 99, 132, 0.2)",
                 "rgba(54, 162, 235, 0.2)",
