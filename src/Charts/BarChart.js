@@ -5,8 +5,9 @@ import styled from "styled-components";
 
 const BarChart = ({ username }) => {
     const [repoData,setRepoData] = useState(null);
-    let stars = [];
-    let repoName = [];
+    let mainRepoData = [];
+    let mostStarredRepos = [];
+    let mostStarredRepoName = [];
     const apiHandler = useCallback(
         async() => {
             try {
@@ -19,23 +20,20 @@ const BarChart = ({ username }) => {
     )
     useEffect(()=>{apiHandler()},[apiHandler])
     if(repoData){
-        stars = repoData.filter(repo => !repo.fork).sort((function(a, b){return b['stargazers_count'] - a['stargazers_count']})).slice(0,5);
-        repoName = repoData.map(data=> data.full_name);
-        // stars.sort((function(a, b){return b['stargazers_count'] - a['stargazers_count']})).slice(0,5);
-       
+      mainRepoData = repoData.filter(repo => !repo.fork).sort((function(a, b){return b['stargazers_count'] - a['stargazers_count']})).slice(0,5);
+      mostStarredRepos = mainRepoData.map(repo => repo.stargazers_count);
+      mostStarredRepoName = mainRepoData.map(repo => repo.name); 
     }
-    // console.log(repoData)
-    console.log(stars)
-    // console.log(repoName)
+    console.log(mainRepoData)
   return (
     <Container>
       <Bar
         data={{
-          labels: repoName,
+          labels: mostStarredRepoName,
           datasets: [
             {
               label: "# of Votes",
-              data: [1,2,3],
+              data: mostStarredRepos,
               backgroundColor: [
                 "rgba(255, 99, 132, 0.2)",
                 "rgba(54, 162, 235, 0.2)",
