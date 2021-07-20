@@ -1,37 +1,31 @@
-import React, { useState, useEffect } from "react";
-import { Pie } from "react-chartjs-2";
+import React, { useState, useEffect,useCallback } from "react";
+import Axios from "axios";
+import { Bar } from "react-chartjs-2";
 import styled from "styled-components";
-import GhPolyglot from "gh-polyglot";
 
-const PieChart = ({ username }) => {
-  const [langData, setLangData] = useState(null);
-  let userData = [];
-  let userLabels = [];
-  useEffect(() => {
-    let me = new GhPolyglot(`${username}`);
-    me.userStats((err, stats) => {
-      if (err) {
-        console.log(err);
-      } else {
-        setLangData(stats);
-      }
-    });
-  }, [username]);
-
-  if (langData) {
-    userData = langData.map((val) => val.value);
-    userLabels = langData.map((val) => val.label);
-  }
-
+const BarChart = ({ username }) => {
+    const [repoData,setRepoData] = useState(null);
+    
+    const apiHandler = useCallback(
+        async() => {
+            try {
+                const { data } = await Axios.get(`https://api.github.com/users/${username}/repos?per_page=100`);
+                console.log(data)
+            } catch (error) {
+                console.log(error)
+            }
+        },[username]
+    ) 
+    useEffect(()=>{apiHandler()},[apiHandler])
   return (
     <Container>
-      <Pie
+      <Bar
         data={{
-          labels: userLabels,
+          labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
           datasets: [
             {
               label: "# of Votes",
-              data: userData,
+              data: [12, 19, 3, 5, 2, 3],
               backgroundColor: [
                 "rgba(255, 99, 132, 0.2)",
                 "rgba(54, 162, 235, 0.2)",
@@ -65,4 +59,4 @@ const Container = styled.div`
   justify-content: center;
   align-items: center;
 `;
-export default PieChart;
+export default BarChart;

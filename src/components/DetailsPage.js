@@ -2,37 +2,12 @@ import React,{useContext} from "react"
 import {IoLocationOutline} from "react-icons/io5"
 import {CgCalendarDates} from "react-icons/cg"
 import UserContext from "../context/UserContext"
-import Chart from "./Chart"
+import Chart from "../Charts/Chart"
 import PieChart from "../Charts/PieChart"
+import BarChart from "../Charts/BarChart"
 import styled  from "styled-components"
 import { Redirect } from "react-router"
 
-const data = {
-    labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
-    datasets: [
-      {
-        label: '# of Votes',
-        data: [12, 19, 3, 5, 2, 3],
-        backgroundColor: [
-          'rgba(255, 99, 132, 0.2)',
-          'rgba(54, 162, 235, 0.2)',
-          'rgba(255, 206, 86, 0.2)',
-          'rgba(75, 192, 192, 0.2)',
-          'rgba(153, 102, 255, 0.2)',
-          'rgba(255, 159, 64, 0.2)',
-        ],
-        borderColor: [
-          'rgba(255, 99, 132, 1)',
-          'rgba(54, 162, 235, 1)',
-          'rgba(255, 206, 86, 1)',
-          'rgba(75, 192, 192, 1)',
-          'rgba(153, 102, 255, 1)',
-          'rgba(255, 159, 64, 1)',
-        ],
-        borderWidth: 1,
-      },
-    ],
-  };
 const DetailsPage = () => {
     const [user,setUser] = useContext(UserContext)
     if(!user){
@@ -78,7 +53,7 @@ const DetailsPage = () => {
         </DetailsDiv>
         <ChartContainer>
         <PieChart username = {user.data.login}/>
-        <Chart/>
+        <BarChart username = {user.data.login}/>
         <Chart/>
         </ChartContainer>
         </div>
