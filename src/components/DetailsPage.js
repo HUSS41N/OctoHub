@@ -3,6 +3,7 @@ import {IoLocationOutline} from "react-icons/io5"
 import {CgCalendarDates} from "react-icons/cg"
 import UserContext from "../context/UserContext"
 import Chart from "./Chart"
+import PieChart from "../Charts/PieChart"
 import styled  from "styled-components"
 import { Redirect } from "react-router"
 
@@ -76,7 +77,7 @@ const DetailsPage = () => {
         </StatDiv>
         </DetailsDiv>
         <ChartContainer>
-        <Chart/>
+        <PieChart username = {user.data.login}/>
         <Chart/>
         <Chart/>
         </ChartContainer>

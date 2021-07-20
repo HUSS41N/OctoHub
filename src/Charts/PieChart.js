@@ -1,13 +1,36 @@
-import React from "react";
-import {Bar} from "react-chartjs-2";
+import React,{useState,useEffect} from "react"
+import {Pie} from "react-chartjs-2"
 import styled from "styled-components";
+import GhPolyglot from "gh-polyglot"
 
-const data = {
-    labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+const PieChart = ({username}) => {
+    const [langData,setLangData] = useState(null);
+    let userData =  [];
+    let userLabels = [];
+    useEffect(()=>{
+            let me = new GhPolyglot(`${username}`);
+            me.userStats((err, stats) => {
+                if(err){
+                    console.log(err)
+                } else {
+                    setLangData(stats);
+                }
+            });
+    },[username])
+
+    if(langData){
+        userData = langData.map(val => val.value);
+        userLabels = langData.map(val => val.label);
+    }
+
+    return (
+        <Container>
+        <Pie data={ {
+    labels: userLabels,
     datasets: [
       {
         label: '# of Votes',
-        data: [12, 19, 3, 5, 2, 3],
+        data: userData,
         backgroundColor: [
           'rgba(255, 99, 132, 0.2)',
           'rgba(54, 162, 235, 0.2)',
@@ -27,13 +50,8 @@ const data = {
         borderWidth: 1,
       },
     ],
-  };
-
-
-const Chart = () => {
-    return (
-        <Container>
-        <Bar data={data} width={600}
+  }
+} width={600}
         height={400}
       
         options={{ maintainAspectRatio: false ,   responsive: true}}
@@ -48,4 +66,4 @@ const Container = styled.div`
     align-items: center;
 
 `
-export default Chart
+export default PieChart
