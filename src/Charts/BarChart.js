@@ -5,18 +5,24 @@ import styled from "styled-components";
 
 const BarChart = ({ username }) => {
     const [repoData,setRepoData] = useState(null);
+    let stars = [];
     
     const apiHandler = useCallback(
         async() => {
             try {
                 const { data } = await Axios.get(`https://api.github.com/users/${username}/repos?per_page=100`);
-                console.log(data)
+                setRepoData(data)
             } catch (error) {
                 console.log(error)
             }
         },[username]
-    ) 
+    )
     useEffect(()=>{apiHandler()},[apiHandler])
+    if(repoData){
+        stars = repoData.map(data => data.stargazers_count);
+        stars.sort((function(a, b){return b - a}))
+    }
+    console.log(stars)
   return (
     <Container>
       <Bar
