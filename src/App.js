@@ -31,6 +31,17 @@ const GlobalStlye = createGlobalStyle`
   html{
     font-size: 62.5%;
   }
+  @media only screen and (max-width: 1366px) {
+	html {
+		font-size: 50%;
+	}
+  @media only screen and (max-width: 550px) {
+    html{
+      font-size: 40%;
+    }
+
+  }
+}
 
 `;
 export default App;
