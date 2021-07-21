@@ -31,7 +31,6 @@ const DoughnutChart = ({ username }) => {
         return starSum;
       })
     }
-    
   return (
     <Container>
       <Doughnut
