@@ -1,13 +1,12 @@
 import React, { useState, useEffect,useCallback } from "react";
 import Axios from "axios";
-import { Bar } from "react-chartjs-2";
+import { Doughnut } from "react-chartjs-2";
 import styled from "styled-components";
 
-const BarChart = ({ username }) => {
+const DoughnutChart = ({ username }) => {
     const [repoData,setRepoData] = useState(null);
-    let mainRepoData = [];
-    let mostStarredRepos = [];
-    let mostStarredRepoName = [];
+    let labels = [];
+    let data = [];
     const apiHandler = useCallback(
         async() => {
             try {
@@ -20,20 +19,28 @@ const BarChart = ({ username }) => {
     )
     useEffect(()=>{apiHandler()},[apiHandler])
     if(repoData){
-      mainRepoData = repoData.filter(repo => !repo.fork).sort((function(a, b){return b['stargazers_count'] - a['stargazers_count']})).slice(0,5);
-      mostStarredRepos = mainRepoData.map(repo => repo.stargazers_count);
-      mostStarredRepoName = mainRepoData.map(repo => repo.name); 
+      // get the top 5 most starred repos
+      let mainRepoData = repoData.filter(repo => !repo.fork).sort((function(a, b){return b['stargazers_count'] - a['stargazers_count']})).slice(0,5);
+      const uniqueLangs = new Set(mainRepoData.map(repo => repo.language));
+      labels = Array.from(uniqueLangs.values()).filter(l => l);
+      // to get the  count of the each labels
+      data = labels.map(lang => {
+        const repos = mainRepoData.filter(repo => repo.language === lang);
+        const starsArr = repos.map(r => r.stargazers_count);
+        const starSum = starsArr.reduce((a, b) => a + b, 0);
+        return starSum;
+      })
     }
-    console.log(mainRepoData)
+    
   return (
     <Container>
-      <Bar
+      <Doughnut
         data={{
-          labels: mostStarredRepoName,
+          labels: labels,
           datasets: [
             {
-              // label: "YOUR MOST STARRED REPOS",
-              data: mostStarredRepos,
+              label: "YOUR MOST STARRED REPOS",
+              data: data,
               backgroundColor: [
                 "rgba(255, 99, 132, 0.2)",
                 "rgba(54, 162, 235, 0.2)",
@@ -56,14 +63,12 @@ const BarChart = ({ username }) => {
         }}
         width={600}
         height={400}
-        options={{ maintainAspectRatio: false, responsive: true,  plugins: {
+        options={{ maintainAspectRatio: false, responsive: true , plugins: {
           title: {
             display: true,
-            text: 'MOST STARRED REPOS',
-          },legend: {
-            display: false
+            text: 'STARS PER LANGUAGE',
           }
-        } }}
+        }}}
       />
     </Container>
   );
@@ -74,4 +79,4 @@ const Container = styled.div`
   justify-content: center;
   align-items: center;
 `;
-export default BarChart;
+export default Doughnut;

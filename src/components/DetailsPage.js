@@ -2,7 +2,7 @@ import React,{useContext} from "react"
 import {IoLocationOutline} from "react-icons/io5"
 import {CgCalendarDates} from "react-icons/cg"
 import UserContext from "../context/UserContext"
-import Chart from "../Charts/Chart"
+import DoughnutChart from "../Charts/DoughnutChart"
 import PieChart from "../Charts/PieChart"
 import BarChart from "../Charts/BarChart"
 import styled  from "styled-components"
@@ -54,7 +54,7 @@ const DetailsPage = () => {
         <ChartContainer>
         <PieChart username = {user.data.login}/>
         <BarChart username = {user.data.login}/>
-        <Chart/>
+        <DoughnutChart username = {user.data.login}/>
         </ChartContainer>
         </div>
     )

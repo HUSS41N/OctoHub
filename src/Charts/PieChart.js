@@ -54,7 +54,12 @@ const PieChart = ({ username }) => {
         }}
         width={600}
         height={400}
-        options={{ maintainAspectRatio: false, responsive: true }}
+        options={{ maintainAspectRatio: false, responsive: true ,  plugins: {
+          title: {
+            display: true,
+            text: 'TOP LANGUAGES',
+          }
+        }}}
       />
     </Container>
   );
