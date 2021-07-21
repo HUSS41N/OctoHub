@@ -79,4 +79,4 @@ const Container = styled.div`
   justify-content: center;
   align-items: center;
 `;
-export default Doughnut;
+export default DoughnutChart;
