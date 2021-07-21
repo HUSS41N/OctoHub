@@ -62,16 +62,17 @@ const DetailsPage = () => {
 const MainContainer = styled.div`
     position: relative;
 `
+
 const DetailsDiv = styled.div`
-    min-height: 60vh;
-    background-color: #74226C;
+    min-height: 90vh;
+    background-color: #4B2142;
     display: flex;
     flex-direction: column;
     padding: 5rem;
     /* justify-content: center; */
     align-items: center;
     a{
-        font-size: 3rem;
+        font-size: 2rem;
         margin: 1.5rem;
         color: #816E94;
         text-decoration: none;
@@ -84,7 +85,7 @@ const DetailsDiv = styled.div`
         color: #8CC7A1;
         text-transform: uppercase;
         font-weight: 500;
-        font-size: 6rem;
+        font-size: 5rem;
     }
     div {
         display: flex;
@@ -116,5 +117,9 @@ const ChartContainer = styled.div`
   justify-content: center;
   align-items:center;
   flex-wrap: wrap;
+  position: absolute;
+   left: 0;
+  right: 0;
+  top: 625px;
 `
 export default DetailsPage;

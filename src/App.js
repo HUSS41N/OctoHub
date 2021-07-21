@@ -40,6 +40,12 @@ const GlobalStlye = createGlobalStyle`
 	}
   @media only screen and (max-width: 550px) {
     html{
+      font-size: 45%;
+    }
+
+  }
+  @media only screen and (max-width: 400px) {
+    html{
       font-size: 40%;
     }
 
