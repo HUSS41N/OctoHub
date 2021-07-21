@@ -31,6 +31,9 @@ const GlobalStlye = createGlobalStyle`
   html{
     font-size: 62.5%;
   }
+  body{
+    background-color: #F2F2F2;
+  }
   @media only screen and (max-width: 1366px) {
 	html {
 		font-size: 50%;

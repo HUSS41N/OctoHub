@@ -14,7 +14,7 @@ const DetailsPage = () => {
         return <Redirect to="/"/>
     }
     return (
-        <div>
+        <MainContainer>
         <DetailsDiv>
             <img src={user.data.avatar_url} alt="placeholder"/>
             <h1>{user.data.name}</h1>
@@ -56,12 +56,14 @@ const DetailsPage = () => {
         <BarChart username = {user.data.login}/>
         <DoughnutChart username = {user.data.login}/>
         </ChartContainer>
-        </div>
+        </MainContainer>
     )
 }
-
+const MainContainer = styled.div`
+    position: relative;
+`
 const DetailsDiv = styled.div`
-    min-height: 90vh;
+    min-height: 60vh;
     background-color: #74226C;
     display: flex;
     flex-direction: column;

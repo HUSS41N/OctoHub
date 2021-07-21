@@ -74,7 +74,7 @@ const Container = styled.div`
   justify-content: center;
   align-items: center;
   background: #fff;
-  border-radius: 2px;
+  border-radius: 10px;
   display: inline-block;
   height: 350px;
   margin: 1rem;
