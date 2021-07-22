@@ -14,7 +14,7 @@ Built with:
 1. Install dependencies
 
    ```bash
-   npm
+   npm install
    ```
 
 2. Fire up the server and watch files
