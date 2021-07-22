@@ -3,6 +3,7 @@ import { RiGitRepositoryLine, RiStarFill } from "react-icons/ri";
 import { GrLanguage } from "react-icons/gr";
 import { IoResizeSharp } from "react-icons/io5";
 import Repos from "../utils/styles/API/repos";
+import { v1 as uuidv1 } from 'uuid';
 import styled from "styled-components";
 
 const Repositories = ({ username }) => {
@@ -38,7 +39,7 @@ const Repositories = ({ username }) => {
   return (
     <AllRepoContainer>
       {finalData.map((data) => (
-        <RepoContainer>
+        <RepoContainer key={uuidv1()}>
             <div>
             <h2>
             <RiGitRepositoryLine /> {data.name}
@@ -49,8 +50,9 @@ const Repositories = ({ username }) => {
           <RepoBottom>
             <div>
               <span>
-                <GrLanguage /> {data.language}{"   "}
+                <GrLanguage /> {data.language} 
               </span>
+              <br></br>
               <span>
                 <RiStarFill /> {data.stars}
               </span>
@@ -98,6 +100,9 @@ const RepoContainer = styled.div`
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+  }
+  @media only screen and (max-width: 600px) {
+        width: 45rem;
   }
 `;
 
