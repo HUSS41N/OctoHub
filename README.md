@@ -1,7 +1,7 @@
 # OctoProfile
 
 A nicer look at your GitHub Profile! With charts!
-
+![demo](https://github.com/HUSS41N/OctoHub/blob/main/static/Capture.PNG)
 Built with:
 
 - [React.js](https://reactjs.org/)
