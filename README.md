@@ -14,11 +14,11 @@ Built with:
 1. Install dependencies
 
    ```bash
-   yarn
+   npm
    ```
 
 2. Fire up the server and watch files
 
    ```bash
-   yarn dev
+   npm start
    ```
