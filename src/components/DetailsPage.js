@@ -5,11 +5,12 @@ import UserContext from "../context/UserContext"
 import DoughnutChart from "../Charts/DoughnutChart"
 import PieChart from "../Charts/PieChart"
 import BarChart from "../Charts/BarChart"
+import Repositories from "./Repositories"
 import styled  from "styled-components"
 import { Redirect } from "react-router"
 
 const DetailsPage = () => {
-    const [user,setUser] = useContext(UserContext)
+    const [user] = useContext(UserContext)
     if(!user){
         return <Redirect to="/"/>
     }
@@ -56,13 +57,22 @@ const DetailsPage = () => {
         <BarChart username = {user.data.login}/>
         <DoughnutChart username = {user.data.login}/>
         </ChartContainer>
+        <X>
+        <Repositories  username = {user.data.login}/>
+        </X>
+      
         </MainContainer>
     )
 }
 const MainContainer = styled.div`
     position: relative;
 `
-
+const X = styled.div`
+position: absolute;
+   left: 0;
+  right: 0;
+  top: 1100px;
+`
 const DetailsDiv = styled.div`
     min-height: 90vh;
     background-color: #4B2142;

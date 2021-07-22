@@ -24,7 +24,6 @@ const BarChart = ({ username }) => {
       mostStarredRepos = mainRepoData.map(repo => repo.stargazers_count);
       mostStarredRepoName = mainRepoData.map(repo => repo.name); 
     }
-    console.log(mainRepoData)
   return (
     <Container>
       <Bar
