@@ -1,6 +1,6 @@
 import React, { useState, useEffect,useCallback } from "react";
-import Axios from "axios";
 import Container from "../utils/styles/Container";
+import Repos from "../utils/styles/API/repos";
 import { Bar } from "react-chartjs-2";
 
 const BarChart = ({ username }) => {
@@ -11,7 +11,7 @@ const BarChart = ({ username }) => {
     const apiHandler = useCallback(
         async() => {
             try {
-                const { data } = await Axios.get(`https://api.github.com/users/${username}/repos?per_page=100`);
+                const { data } = await Repos.get(`/${username}/repos?per_page=100`);
                 setRepoData(data)
             } catch (error) {
                 console.log(error)
