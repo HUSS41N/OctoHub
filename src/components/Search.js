@@ -17,13 +17,16 @@ const Search = () => {
             console.log(error)
         }
     }
+    
     const formSubmitHandler = (e) => {
         e.preventDefault();
         apiHandler();
     }
+
     if(user){
         return <Redirect to="/result"/>
     }
+
     return(
         <SearchContainer>
             <img src={logo} alt="github octocat logo png"/>

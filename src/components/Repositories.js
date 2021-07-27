@@ -17,9 +17,11 @@ const Repositories = ({ username }) => {
       console.log(error);
     }
   }, [username]);
+
   useEffect(() => {
     apiHandler();
   }, [apiHandler]);
+  
   if (repoData) {
     finalData = repoData.map((repo) => ({
       name: repo.name,
