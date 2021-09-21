@@ -1,24 +1,12 @@
-import React, { useState, useEffect,useCallback } from "react";
-import Repos from "../utils/API/repos";
 import { Doughnut } from "react-chartjs-2";
 import Container from "../utils/styles/Container";
 
 
-const DoughnutChart = ({ username }) => {
-    const [repoData,setRepoData] = useState(null);
+const DoughnutChart = ({ repoData }) => {
+
     let labels = [];
     let data = [];
-    const apiHandler = useCallback(
-        async() => {
-            try {
-                const { data } = await Repos.get(`/${username}/repos?per_page=100`);
-                setRepoData(data)
-            } catch (error) {
-                console.log(error)
-            }
-        },[username]
-    )
-    useEffect(()=>{apiHandler()},[apiHandler])
+
     if(repoData){
       // get the top 5 most starred repos
       let mainRepoData = repoData.filter(repo => !repo.fork).sort((function(a, b){return b['stargazers_count'] - a['stargazers_count']})).slice(0,5);
@@ -32,6 +20,7 @@ const DoughnutChart = ({ username }) => {
         return starSum;
       })
     }
+    
   return (
     <Container>
       <Doughnut

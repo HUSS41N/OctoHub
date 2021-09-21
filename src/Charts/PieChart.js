@@ -4,9 +4,11 @@ import Container from "../utils/styles/Container";
 import GhPolyglot from "gh-polyglot";
 
 const PieChart = ({ username }) => {
+  
   const [langData, setLangData] = useState(null);
   let userData = [];
   let userLabels = [];
+
   useEffect(() => {
     let me = new GhPolyglot(`${username}`);
     me.userStats((err, stats) => {

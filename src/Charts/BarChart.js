@@ -1,29 +1,17 @@
-import React, { useState, useEffect,useCallback } from "react";
 import Container from "../utils/styles/Container";
-import Repos from "../utils/API/repos";
 import { Bar } from "react-chartjs-2";
 
-const BarChart = ({ username }) => {
-    const [repoData,setRepoData] = useState(null);
+const BarChart = ({repoData}) => {
+
     let mainRepoData = [];
     let mostStarredRepos = [];
     let mostStarredRepoName = [];
-    const apiHandler = useCallback(
-        async() => {
-            try {
-                const { data } = await Repos.get(`/${username}/repos?per_page=100`);
-                setRepoData(data)
-            } catch (error) {
-                console.log(error)
-            }
-        },[username]
-    )
-    useEffect(()=>{apiHandler()},[apiHandler])
     if(repoData){
       mainRepoData = repoData.filter(repo => !repo.fork).sort((function(a, b){return b['stargazers_count'] - a['stargazers_count']})).slice(0,5);
       mostStarredRepos = mainRepoData.map(repo => repo.stargazers_count);
       mostStarredRepoName = mainRepoData.map(repo => repo.name); 
     }
+
   return (
     <Container>
       <Bar
