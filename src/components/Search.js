@@ -1,41 +1,29 @@
-import React,{useState,useContext} from "react";
-import UserContext from "../context/UserContext"
-import Axios from "axios";
+import React from "react";
+import { withRouter } from 'react-router-dom';
 import logo from "../logo/Octocat.png"
 import styled  from "styled-components";
-import { Redirect } from "react-router";
-const Search = () => {
-    // const context = useContext(UserContext);
-    const [user,setUser] = useContext(UserContext)
-    const [username,setUsername] = useState("");
 
-    const apiHandler = async() => {
-        try {
-            const { data } = await Axios.get(`https://api.github.com/users/${username}`);
-            setUser({data})
-        } catch (error) {
-            console.log(error)
-        }
-    }
+
+class Search extends React.Component{
+    state = {username:""}
     
-    const formSubmitHandler = (e) => {
-        e.preventDefault();
-        apiHandler();
+    formSubmitHandler (e){
+        e.preventDefault()
+        this.props.history.push(`/result?username=${this.state.username}`);
     }
 
-    if(user){
-        return <Redirect to="/result"/>
+    render(){
+        return(
+            <SearchContainer>
+                <img src={logo} alt="github octocat logo png"/>
+                <Title>Find your Profile</Title>
+                <form onSubmit={this.formSubmitHandler.bind(this)}>
+                    <input value={this.state.username} onChange={e=>this.setState({username:e.target.value})} type="text" placeholder="Github Username" size="50"/>
+                </form>
+            </SearchContainer>
+        )
     }
 
-    return(
-        <SearchContainer>
-            <img src={logo} alt="github octocat logo png"/>
-            <Title>Find your Profile</Title>
-            <form onSubmit={formSubmitHandler}>
-                <input value={username} onChange={e=>setUsername(e.target.value)} type="text" placeholder="Github Username" size="50"/>
-            </form>
-        </SearchContainer>
-    )
 }
 const Title = styled.h1`
     color: #8CC7A1;
@@ -59,4 +47,4 @@ const SearchContainer = styled.div`
         outline-width: 0;
     }
 `
-export default Search;
+export default withRouter(Search);

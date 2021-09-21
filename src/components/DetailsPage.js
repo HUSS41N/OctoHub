@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext,useEffect,useCallback} from "react";
 import { IoLocationOutline } from "react-icons/io5";
 import { CgCalendarDates } from "react-icons/cg";
 import UserContext from "../context/UserContext";
@@ -7,13 +7,31 @@ import PieChart from "../Charts/PieChart";
 import BarChart from "../Charts/BarChart";
 import Repositories from "./Repositories";
 import styled from "styled-components";
-import { Redirect } from "react-router";
+// import { Redirect } from "react-router";
+import Axios from "axios";
+import { useLocation } from "react-router-dom";
 
+const useQuery = () => {
+  return new URLSearchParams(useLocation().search);
+};
 const DetailsPage = () => {
-  const [user] = useContext(UserContext);
-  if (!user) {
-    return <Redirect to="/" />;
-  }
+  const [user, setUser] = useContext(UserContext);
+  let query = useQuery();
+  let username = query.get("username");
+
+  const apiHandler = useCallback(
+    async() => {
+        try {
+            const { data } = await Axios.get(`https://api.github.com/users/${username}`);
+            console.log({ data });
+            setUser(data);
+        } catch (error) {
+            console.log(error)
+        }
+    },[username,setUser]
+)
+  useEffect(()=>{apiHandler()},[apiHandler])
+
   return (
     <MainContainer>
       <DetailsDiv>
@@ -50,7 +68,7 @@ const DetailsPage = () => {
         </StatDiv>
       </DetailsDiv>
       <ChartContainer>
-        <PieChart username={user.data.login} />
+        <PieChart username={query.get("username")} />
         <BarChart username={user.data.login} />
         <DoughnutChart username={user.data.login} />
       </ChartContainer>
@@ -69,16 +87,16 @@ const X = styled.div`
   right: 0;
   top: 1050px;
   @media only screen and (max-width: 1126px) {
-        top: 1300px;
+    top: 1300px;
   }
   @media only screen and (max-width: 748px) {
-        top: 1650px;
+    top: 1650px;
   }
   @media only screen and (max-width: 550px) {
-        top: 1550px;
+    top: 1550px;
   }
   @media only screen and (max-width: 400px) {
-        top: 1450px;
+    top: 1450px;
   }
 `;
 const DetailsDiv = styled.div`
@@ -130,7 +148,6 @@ const StatDiv = styled.div`
     }
   }
   @media only screen and (max-width: 400px) {
-        
   }
 `;
 const ChartContainer = styled.div`
