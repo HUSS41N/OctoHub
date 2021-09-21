@@ -26,7 +26,7 @@ class Search extends React.Component{
 
 }
 const Title = styled.h1`
-    color: #8CC7A1;
+    color: #e3f6f5;
     font-size: 6rem;
     margin: 2rem;
 `
@@ -37,7 +37,7 @@ const SearchContainer = styled.div`
     /* justify-content: center; */
     align-items: center;
     flex-direction: column;
-    background-color: #4B2142;
+    background-color: #272643;
     img{
         width: 200px;
         margin-top: 4rem;

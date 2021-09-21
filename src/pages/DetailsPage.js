@@ -97,9 +97,11 @@ const Space = styled.div`
     top: 1450px;
   }
 `;
+// #e3f6f5
+
 const DetailsDiv = styled.div`
   min-height: 90vh;
-  background-color: #4b2142;
+  background-color: #272643;
   display: flex;
   flex-direction: column;
   padding: 5rem;
@@ -108,7 +110,7 @@ const DetailsDiv = styled.div`
   a {
     font-size: 2rem;
     margin: 1.5rem;
-    color: #816e94;
+    color: #e3f6f5;
     text-decoration: none;
   }
   img {
@@ -116,7 +118,7 @@ const DetailsDiv = styled.div`
     border-radius: 50%;
   }
   h1 {
-    color: #8cc7a1;
+    color: #e3f6f5;
     text-transform: uppercase;
     font-weight: 500;
     font-size: 5rem;
@@ -136,7 +138,7 @@ const StatDiv = styled.div`
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    background-color: #8cc7a1;
+    background-color: #e3f6f5;
     color: #74226c;
     padding: 1rem;
     border-radius: 10px;

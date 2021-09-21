@@ -37,7 +37,6 @@ const Repositories = ({ username }) => {
       })
       .slice(0, 12);
   }
-  console.log(finalData);
   return (
     <AllRepoContainer>
       {finalData.map((data) => (
