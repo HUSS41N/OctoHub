@@ -7,7 +7,7 @@ import Repos from "../utils/API/repos";
 
 const ChartContainer = ({username}) => {
     const [repoData,setRepoData] = useState(null);
-
+    
     const apiHandler = useCallback(
         async() => {
             try {
