@@ -1,5 +1,5 @@
 import React, { useState, useEffect,useCallback } from "react";
-import Repos from "../utils/styles/API/repos";
+import Repos from "../utils/API/repos";
 import { Doughnut } from "react-chartjs-2";
 import Container from "../utils/styles/Container";
 

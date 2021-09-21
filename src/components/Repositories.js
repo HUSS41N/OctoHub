@@ -2,7 +2,7 @@ import React, { useState, useEffect, useCallback } from "react";
 import { RiGitRepositoryLine, RiStarFill } from "react-icons/ri";
 import { GrLanguage } from "react-icons/gr";
 import { IoResizeSharp } from "react-icons/io5";
-import Repos from "../utils/styles/API/repos";
+import Repos from "../utils/API/repos";
 import { v1 as uuidv1 } from 'uuid';
 import styled from "styled-components";
 

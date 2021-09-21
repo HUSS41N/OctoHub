@@ -1,6 +1,6 @@
 import React, { useState, useEffect,useCallback } from "react";
 import Container from "../utils/styles/Container";
-import Repos from "../utils/styles/API/repos";
+import Repos from "../utils/API/repos";
 import { Bar } from "react-chartjs-2";
 
 const BarChart = ({ username }) => {
