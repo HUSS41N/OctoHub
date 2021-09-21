@@ -1,6 +1,6 @@
 import React,{useState} from "react";
-import Search from "./components/Search";
-import DetailsPage from "./components/DetailsPage";
+import Search from "./pages/Search"
+import DetailsPage from "./pages/DetailsPage";
 import PageNotFound from "./components/PageNotFound"
 import { createGlobalStyle } from "styled-components";
 import UserContext from "./context/UserContext"

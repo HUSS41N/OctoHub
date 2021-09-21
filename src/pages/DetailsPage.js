@@ -1,10 +1,8 @@
 import React, { useState, useEffect, useCallback } from "react";
 import { IoLocationOutline } from "react-icons/io5";
 import { CgCalendarDates } from "react-icons/cg";
-import DoughnutChart from "../Charts/DoughnutChart";
-import PieChart from "../Charts/PieChart";
-import BarChart from "../Charts/BarChart";
-import Repositories from "./Repositories";
+import ChartContainer from "../components/ChartContainer";
+import Repositories from "../components/Repositories";
 import styled from "styled-components";
 // import { Redirect } from "react-router";
 import Axios from "axios";
@@ -69,13 +67,9 @@ const DetailsPage = () => {
           </div>
         </StatDiv>
       </DetailsDiv>
-      <ChartContainer>
-        <PieChart username={query.get("username")} />
-        <BarChart username={user.login} />
-        <DoughnutChart username={user.login} />
-      </ChartContainer>
+      <ChartContainer username={username}></ChartContainer>
       <Space>
-        <Repositories username={user.login} />
+        <Repositories username={username} />
       </Space>
     </MainContainer>
   );
@@ -154,14 +148,5 @@ const StatDiv = styled.div`
   @media only screen and (max-width: 400px) {
   }
 `;
-const ChartContainer = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-wrap: wrap;
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: 625px;
-`;
+
 export default DetailsPage;
