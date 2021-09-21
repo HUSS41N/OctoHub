@@ -35,7 +35,7 @@ const Repositories = ({ username }) => {
       .sort(function (a, b) {
         return b["stars"] - a["stars"];
       })
-      .slice(0, 10);
+      .slice(0, 12);
   }
   console.log(finalData);
   return (
@@ -84,7 +84,7 @@ const RepoContainer = styled.div`
   border-radius: 10px;
   font-size: 1.25rem;
   height: 20rem;
-  width: 35rem;
+  width: 33.5rem;
   margin: 1rem;
   padding: 4rem;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
