@@ -1,7 +1,6 @@
-import React, { useContext,useEffect,useCallback} from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { IoLocationOutline } from "react-icons/io5";
 import { CgCalendarDates } from "react-icons/cg";
-import UserContext from "../context/UserContext";
 import DoughnutChart from "../Charts/DoughnutChart";
 import PieChart from "../Charts/PieChart";
 import BarChart from "../Charts/BarChart";
@@ -14,38 +13,41 @@ import { useLocation } from "react-router-dom";
 const useQuery = () => {
   return new URLSearchParams(useLocation().search);
 };
+
 const DetailsPage = () => {
-  const [user, setUser] = useContext(UserContext);
+  const [user, setUser] = useState({});
   let query = useQuery();
   let username = query.get("username");
 
-  const apiHandler = useCallback(
-    async() => {
-        try {
-            const { data } = await Axios.get(`https://api.github.com/users/${username}`);
-            console.log({ data });
-            setUser(data);
-        } catch (error) {
-            console.log(error)
-        }
-    },[username,setUser]
-)
-  useEffect(()=>{apiHandler()},[apiHandler])
+  const apiHandler = useCallback(async () => {
+    try {
+      const { data } = await Axios.get(
+        `https://api.github.com/users/${username}`
+      );
+      setUser(data);
+    } catch (error) {
+      console.log(error);
+    }
+  }, [username, setUser]);
 
+  useEffect(() => {
+    apiHandler();
+  },[apiHandler]);
   return (
+    
     <MainContainer>
       <DetailsDiv>
-        <img src={user.data.avatar_url} alt="placeholder" />
-        <h1>{user.data.name}</h1>
-        <a href={user.data.html_url}>@{user.data.login}</a>
+        <img src={user.avatar_url} alt="placeholder" />
+        <h1>{user.name}</h1>
+        <a href={user.html_url}>@{user.login}</a>
         <div>
           <p>
-            <IoLocationOutline /> {user.data.location}
+            <IoLocationOutline /> {user.location}
             {"    "}
           </p>
           <p>
             <CgCalendarDates /> joined{" "}
-            {new Date(user.data.created_at).toLocaleDateString("en-US", {
+            {new Date(user.created_at).toLocaleDateString("en-US", {
               month: "long",
               day: "numeric",
               year: "numeric",
@@ -54,34 +56,34 @@ const DetailsPage = () => {
         </div>
         <StatDiv>
           <div>
-            <h2>{user.data.followers}</h2>
+            <h2>{user.followers}</h2>
             <p>Followers</p>
           </div>
           <div>
-            <h2>{user.data.public_repos}</h2>
+            <h2>{user.public_repos}</h2>
             <p>Repositories</p>
           </div>
           <div>
-            <h2>{user.data.following}</h2>
+            <h2>{user.following}</h2>
             <p>Following</p>
           </div>
         </StatDiv>
       </DetailsDiv>
       <ChartContainer>
         <PieChart username={query.get("username")} />
-        <BarChart username={user.data.login} />
-        <DoughnutChart username={user.data.login} />
+        <BarChart username={user.login} />
+        <DoughnutChart username={user.login} />
       </ChartContainer>
-      <X>
-        <Repositories username={user.data.login} />
-      </X>
+      <Space>
+        <Repositories username={user.login} />
+      </Space>
     </MainContainer>
   );
 };
 const MainContainer = styled.div`
   position: relative;
 `;
-const X = styled.div`
+const Space = styled.div`
   position: absolute;
   left: 0;
   right: 0;
