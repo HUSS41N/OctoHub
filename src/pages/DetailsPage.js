@@ -82,8 +82,11 @@ const Space = styled.div`
   left: 0;
   right: 0;
   top: 1050px;
-  width: 80%;
+  /* width: 80%; */
   margin: auto;
+  @media only screen and (min-width: 1920px) {
+    width:80%
+  }
   @media only screen and (max-width: 1126px) {
     top: 1300px;
   }

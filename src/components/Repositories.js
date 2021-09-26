@@ -74,6 +74,7 @@ const AllRepoContainer = styled.div`
   justify-content: center;
   align-items: center;
   flex-wrap: wrap;
+  max-width: 2200px;
 `;
 const RepoContainer = styled.div`
   display: flex;
